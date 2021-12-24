@@ -33,7 +33,35 @@ class Node {
 
 public class LinkedList {
     public static void main (String[] args) {
-
+        LinkedListOperation linkedListOperation = new LinkedListOperation();
+        int choice = 0;
         System.out.println("****Simple Linked List*****");
+        System.out.println("1.Add linked List");
+        choice = UserInput.intVal();
+
+        switch (choice) {
+            case 1:
+                linkedListOperation.insertFirst(UserInput.intVal());
+                break;
+            default:
+                System.out.println("Wrong Choice..!");
+                break;
+        }
+    }
+}
+
+class LinkedListOperation {
+    private Node head;
+    private int counter;
+
+    public void insertFirst(int data) {
+        Node newNode = new Node(data);
+        if (head == null) {
+            head = newNode;
+        } else {
+            newNode.setNext(head);
+            head = newNode;
+        }
+        counter++;
     }
 }
