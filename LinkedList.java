@@ -35,11 +35,11 @@ public class LinkedList {
     public static void main (String[] args) {
         LinkedListOperation linkedListOperation = new LinkedListOperation();
         int choice = 0;
-        int exit = 7;
+        int exit = 8;
         do {
             System.out.println("****Simple Linked List*****");
             System.out.println("1.Add First\n2.Add Last\n3.Nth Position\n4.Remove First\n5.Remove Last" +
-                    "\n6.Print List\n7.Exit");
+                    "\n6.Search Element\n7.Print List\n8.Exit");
             choice = UserInput.intVal();
 
             switch (choice) {
@@ -64,9 +64,13 @@ public class LinkedList {
                     linkedListOperation.deleteLast();
                     break;
                 case 6:
-                    linkedListOperation.printList();
+                    System.out.println("Enter the Search Element :");
+                    linkedListOperation.searchElement(UserInput.intVal());
                     break;
                 case 7:
+                    linkedListOperation.printList();
+                    break;
+                case 8:
                     break;
                 default:
                     System.out.println("Wrong Choice..!");
@@ -161,6 +165,24 @@ class LinkedListOperation {
             newNode.setNext(prev.getNext());
             prev.setNext(newNode);
             counter++;
+        }
+    }
+
+    public void searchElement(int data) {
+        if (head == null) {
+            System.out.println("No Element Found..!");
+        }
+        else {
+            Node temp = head;
+            while (temp != null) {
+                if (temp.getData() == data) {
+                    System.out.println("Element Found -> "+data);
+                    break;
+                }
+                else {
+                    temp = temp.getNext();
+                }
+            }
         }
     }
 
