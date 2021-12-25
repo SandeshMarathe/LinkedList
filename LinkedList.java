@@ -4,7 +4,7 @@ class UserInput {
     private static Scanner scanner = new Scanner(System.in);
     public static int intVal(){return scanner.nextInt();};
 }
-
+//UC-1
 class Node {
     private int data;
     private Node next;
@@ -35,11 +35,11 @@ public class LinkedList {
     public static void main (String[] args) {
         LinkedListOperation linkedListOperation = new LinkedListOperation();
         int choice = 0;
-        int exit = 9;
+        int exit = 10;
         do {
             System.out.println("****Simple Linked List*****");
             System.out.println("1.Add First\n2.Add Last\n3.Nth Position\n4.Remove First\n5.Remove Last" +
-                    "\n6.Remove Nth Position\n7.Search Node\n8.Print List\n9.Exit");
+                    "\n6.Remove Nth Position\n7.Search Node\n8.Print List\n9.Sort Order\n10.Exit");
             choice = UserInput.intVal();
 
             switch (choice) {
@@ -75,6 +75,9 @@ public class LinkedList {
                     linkedListOperation.printList();
                     break;
                 case 9:
+                    linkedListOperation.ascendingOrder();
+                    break;
+                case 10:
                     break;
                 default:
                     System.out.println("Wrong Choice..!");
@@ -87,7 +90,7 @@ public class LinkedList {
 class LinkedListOperation {
     private Node head;
     private int counter=0;
-
+    //UC-2
     public void insertFirst(int data) {
         Node newNode = new Node(data);
         if (head == null) {
@@ -98,7 +101,7 @@ class LinkedListOperation {
         }
         counter++;
     }
-
+    //UC-5
     public void deleteFirst() {
         if (head == null) {
             System.out.println("List is Empty..!");
@@ -114,7 +117,7 @@ class LinkedListOperation {
         }
         counter--;
     }
-
+    //UC-3
     public void insertLast(int data) {
         Node newNode = new Node(data);
         if (head == null) {
@@ -129,7 +132,7 @@ class LinkedListOperation {
         }
         counter++;
     }
-
+    //UC-6
     public void deleteLast() {
         if (head == null) {
             System.out.println("List is Empty..!");
@@ -148,7 +151,7 @@ class LinkedListOperation {
             prev.setNext(null);
         }
     }
-
+    //UC-4,8
     public void insertNthPosition(int data, int pos) {
         Node newNode = new Node(data);
         int countNode = 0;
@@ -171,7 +174,7 @@ class LinkedListOperation {
             counter++;
         }
     }
-
+    //UC-9
     public void deleteNthPosition(int pos) {
         int countNode = 0;
         if (head == null) {
@@ -197,7 +200,7 @@ class LinkedListOperation {
             counter--;
         }
     }
-
+    //UC-7
     public void searchElement(int data) {
         if (head == null) {
             System.out.println("No Element Found..!");
@@ -226,6 +229,29 @@ class LinkedListOperation {
                 System.out.print(temp.getData() + " -> ");
                 temp = temp.getNext();
             }
+        }
+    }
+    //UC-10
+    public void ascendingOrder() {
+        if (head == null) {
+            System.out.println("List is Empty..!");
+        }
+        else {
+            Node temp = head, nextNode = null;
+
+            while (temp != null) {
+                nextNode = temp.getNext();
+                while (nextNode != null) {
+                    if (temp.getData() > nextNode.getData()) {
+                        int temp_Node = temp.getData();
+                        temp.setData(nextNode.getData());
+                        nextNode.setData(temp_Node);
+                    }
+                    nextNode = nextNode.getNext();
+                }
+                temp = temp.getNext();
+            }
+            printList();
         }
     }
 }
