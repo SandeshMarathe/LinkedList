@@ -35,11 +35,11 @@ public class LinkedList {
     public static void main (String[] args) {
         LinkedListOperation linkedListOperation = new LinkedListOperation();
         int choice = 0;
-        int exit = 6;
+        int exit = 7;
         do {
             System.out.println("****Simple Linked List*****");
-            System.out.println("1.Add First\n2.Add Last\n3.Nth Position\n4.Remove First\n5.Print List" +
-                    "\n6.Exit");
+            System.out.println("1.Add First\n2.Add Last\n3.Nth Position\n4.Remove First\n5.Remove Last" +
+                    "\n6.Print List\n7.Exit");
             choice = UserInput.intVal();
 
             switch (choice) {
@@ -61,7 +61,12 @@ public class LinkedList {
                     linkedListOperation.deleteFirst();
                     break;
                 case 5:
+                    linkedListOperation.deleteLast();
+                    break;
+                case 6:
                     linkedListOperation.printList();
+                    break;
+                case 7:
                     break;
                 default:
                     System.out.println("Wrong Choice..!");
@@ -115,6 +120,25 @@ class LinkedListOperation {
             temp.setNext(newNode);
         }
         counter++;
+    }
+
+    public void deleteLast() {
+        if (head == null) {
+            System.out.println("List is Empty..!");
+        }
+        else if (head.getNext() == null) {
+            head = null;
+        }
+        else {
+            Node temp = head;
+            Node prev = head;
+            while (temp.getNext() != null) {
+                prev = temp;
+                temp = temp.getNext();
+            }
+            System.out.println(temp.getData()+" Remove");
+            prev.setNext(null);
+        }
     }
 
     public void insertNthPosition(int data, int pos) {
