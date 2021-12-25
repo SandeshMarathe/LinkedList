@@ -35,11 +35,11 @@ public class LinkedList {
     public static void main (String[] args) {
         LinkedListOperation linkedListOperation = new LinkedListOperation();
         int choice = 0;
-        int exit = 8;
+        int exit = 9;
         do {
             System.out.println("****Simple Linked List*****");
             System.out.println("1.Add First\n2.Add Last\n3.Nth Position\n4.Remove First\n5.Remove Last" +
-                    "\n6.Search Element\n7.Print List\n8.Exit");
+                    "\n6.Remove Nth Position\n7.Search Node\n8.Print List\n9.Exit");
             choice = UserInput.intVal();
 
             switch (choice) {
@@ -64,13 +64,17 @@ public class LinkedList {
                     linkedListOperation.deleteLast();
                     break;
                 case 6:
+                    System.out.println("Enter the Position :");
+                    linkedListOperation.deleteNthPosition(UserInput.intVal());
+                    break;
+                case 7:
                     System.out.println("Enter the Search Element :");
                     linkedListOperation.searchElement(UserInput.intVal());
                     break;
-                case 7:
+                case 8:
                     linkedListOperation.printList();
                     break;
-                case 8:
+                case 9:
                     break;
                 default:
                     System.out.println("Wrong Choice..!");
@@ -153,7 +157,7 @@ class LinkedListOperation {
             head = newNode;
         } else if (pos < 0 || pos > counter) {
             System.out.println("Invalid Position");
-        } else if (pos-1 == 0) {
+        } else if (pos - 1 == 0) {
             insertFirst(data);
         } else {
             Node temp = head;
@@ -165,6 +169,32 @@ class LinkedListOperation {
             newNode.setNext(prev.getNext());
             prev.setNext(newNode);
             counter++;
+        }
+    }
+
+    public void deleteNthPosition(int pos) {
+        int countNode = 0;
+        if (head == null) {
+            System.out.println("List Empty..!");
+        } else if (head.getNext() == null) {
+            System.out.println(head.getData()+" Remove..");
+            head = null;
+            counter--;
+        } else if (pos < 0 || pos > counter) {
+            System.out.println("Invalid Position..!");
+        } else if (pos - 1 == 0) {
+            deleteFirst();
+        } else {
+            Node prev = head;
+            Node temp = head;
+            while (countNode < pos -1) {
+                prev = temp;
+                temp = temp.getNext();
+                countNode++;
+            }
+            prev.setNext(temp.getNext());
+            temp.setNext(null);
+            counter--;
         }
     }
 
